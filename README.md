@@ -18,7 +18,7 @@ Ensure you have the following installed:
 1) Clone the repository:
 
 ```shell
-git clone url
+git clone https://github.com/oURMIo/web-playground.git
 cd web-playground
 ```
 
