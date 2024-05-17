@@ -16,10 +16,11 @@ class SecurityConfiguration {
 //        TODO finish method
         http
             .authorizeHttpRequests { request ->
-                request.anyRequest().permitAll()
-//                request.requestMatchers("/").permitAll()
-//                request.requestMatchers("/api/users").hasRole("ADMIN")
-//                request.anyRequest().authenticated()
+                request
+                    .requestMatchers("/").permitAll()
+                    .requestMatchers("user/s**").hasRole("USER")
+                    .requestMatchers("admin/**").hasRole("ADMIN")
+                    .anyRequest().authenticated()
             }
             .csrf { csrf ->
                 /* Disables protection against CSRF attacks */

@@ -9,23 +9,17 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "users")
-class UserApp {
+data class WebUser(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long = 0
+    var id: Long = 0,
 
     @Column(name = "username")
-    var username: String = ""
-        private set
+    var username: String,
 
     @Column(name = "password")
-    var password: String = ""
-        private set
+    var password: String,
 
-    constructor()
-
-    constructor(name: String, city: String) {
-        this.username = name
-        this.password = city
-    }
-}
+    @Column(name = "role")
+    var role: String = AppRole.USER.toString(),
+)

@@ -1,6 +1,6 @@
 package com.home.web.controller
 
-import com.home.web.domain.UserApp
+import com.home.web.domain.WebUser
 import com.home.web.dto.WebUserAppDto
 import com.home.web.service.UserAppService
 import java.util.Optional
@@ -28,7 +28,7 @@ class UserAppController(
 
 
     @GetMapping("/get")
-    fun getUsers(): List<UserApp> {
+    fun getUsers(): List<WebUser> {
         logger.debug { "Invoke in getUsers" }
         return userAppService.getUsers()
     }
@@ -60,7 +60,7 @@ class UserAppController(
     }
 
     @PostMapping("/create")
-    fun createUser(@RequestBody webUserAppDto: WebUserAppDto): Optional<UserApp> {
+    fun createUser(@RequestBody webUserAppDto: WebUserAppDto): Optional<WebUser> {
         logger.debug { "Invoke createUser(webUserAppDto:$webUserAppDto)" }
         return userAppService.createUser(webUserAppDto.username, webUserAppDto.password)
     }
