@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service
 private val logger = KotlinLogging.logger {}
 
 @Service
-class UserAppService(
+class WebUserService(
     @Autowired
     private val webUserRepository: WebUserRepository,
 ) {
 
-    fun getUsers(): List<WebUser> {
+    fun getWebUsers(): List<WebUser> {
         try {
             return webUserRepository.findAll().toList()
         } catch (e: DatabaseException) {
-            logger.error { "Got issue in getUsers, $e" }
+            logger.error { "Got issue in getWebUsers, $e" }
             return listOf()
         }
     }
@@ -29,7 +29,7 @@ class UserAppService(
         try {
             return webUserRepository.findById(userId)
         } catch (e: DatabaseException) {
-            logger.error { "Got issue in getUsers(userId:$userId), $e" }
+            logger.error { "Got issue in findById(userId:$userId), $e" }
             return Optional.empty()
         }
     }
@@ -43,21 +43,21 @@ class UserAppService(
         }
     }
 
-    fun createUser(username: String, password: String): Optional<WebUser> {
+    fun createWebUser(username: String, password: String): Optional<WebUser> {
         val webUser = WebUser(username = username, password = password)
         try {
             return Optional.of(webUserRepository.save(webUser))
         } catch (e: DatabaseException) {
-            logger.error { "Got issue in createUser(username:$username, password:$password), $e" }
+            logger.error { "Got issue in createWebUser(username:$username, password:$password), $e" }
             return Optional.empty()
         }
     }
 
-    fun deleteUserById(userId: Long) {
+    fun deleteWebUserById(userId: Long) {
         try {
             webUserRepository.deleteById(userId)
         } catch (e: DatabaseException) {
-            logger.error { "Got issue in deleteUserById, $e" }
+            logger.error { "Got issue in deleteWebUserById, $e" }
         }
     }
 }

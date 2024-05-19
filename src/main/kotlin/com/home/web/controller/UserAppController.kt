@@ -2,7 +2,7 @@ package com.home.web.controller
 
 import com.home.web.domain.WebUser
 import com.home.web.dto.WebUserAppDto
-import com.home.web.service.UserAppService
+import com.home.web.service.WebUserService
 import java.util.Optional
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,7 +20,7 @@ private val logger = KotlinLogging.logger {}
 @RestController
 @RequestMapping("/api/users")
 class UserAppController(
-    @Autowired private val userAppService: UserAppService,
+    @Autowired private val webUserService: WebUserService,
 ) {
 
     @GetMapping("", "/")
@@ -30,7 +30,7 @@ class UserAppController(
     @GetMapping("/get")
     fun getUsers(): List<WebUser> {
         logger.debug { "Invoke in getUsers" }
-        return userAppService.getUsers()
+        return webUserService.getWebUsers()
     }
 
     @GetMapping("/get-user")
@@ -38,7 +38,7 @@ class UserAppController(
         @RequestParam("userId") userId: Long,
     ): ResponseEntity<out Any> {
         logger.debug { "Invoke in getUserById(userId:$userId)" }
-        val userApp = userAppService.findById(userId)
+        val userApp = webUserService.findById(userId)
         return if (userApp.isPresent) {
             ResponseEntity(userApp, HttpStatus.OK)
         } else {
@@ -51,7 +51,7 @@ class UserAppController(
         @RequestParam("username") username: String,
     ): ResponseEntity<out Any> {
         logger.debug { "Invoke in getUserByUsername(username:$username)" }
-        val userApp = userAppService.findByUsername(username)
+        val userApp = webUserService.findByUsername(username)
         return if (userApp.isPresent) {
             ResponseEntity(userApp, HttpStatus.OK)
         } else {
@@ -62,13 +62,13 @@ class UserAppController(
     @PostMapping("/create")
     fun createUser(@RequestBody webUserAppDto: WebUserAppDto): Optional<WebUser> {
         logger.debug { "Invoke createUser(webUserAppDto:$webUserAppDto)" }
-        return userAppService.createUser(webUserAppDto.username, webUserAppDto.password)
+        return webUserService.createWebUser(webUserAppDto.username, webUserAppDto.password)
     }
 
     @GetMapping("/delete")
     fun deleteUser(@RequestParam("userId") userId: Long): String {
         logger.debug { "Invoke deleteUser(userId:$userId)" }
-        userAppService.deleteUserById(userId)
+        webUserService.deleteWebUserById(userId)
         return DONE_STATUS
     }
 }

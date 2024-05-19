@@ -1,6 +1,6 @@
 -- INIT DATABASE
 
-INSERT INTO users (id, username, password) VALUES
+INSERT INTO web_users (id, username, password) VALUES
 (1001, 'user', 'pass', 'USER'),
 (1002, 'admin', 'pass', 'ADMIN');
 

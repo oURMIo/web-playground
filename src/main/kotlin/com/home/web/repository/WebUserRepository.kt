@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserAppRepository : CrudRepository<WebUser, Long> {
+interface WebUserRepository : CrudRepository<WebUser, Long> {
     fun findByUsername(username: String): List<WebUser>
     fun findFirstByUsername(username: String): Optional<WebUser>
 }

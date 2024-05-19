@@ -15,7 +15,7 @@ data class CityWeather(
     var id: Long = 0,
 
     @Column(name = "city_name")
-    var username: String,
+    var cityName: String,
 
     @Column(name = "temp")
     var temp: Double,

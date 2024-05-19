@@ -31,7 +31,7 @@ class GlobalExceptionHandler {
         return ResponseEntity("Received invalid request type", HttpStatus.BAD_REQUEST)
     }
 
-    @ExceptionHandler(UserAppNotFoundException::class)
+    @ExceptionHandler(WebUserNotFoundException::class)
     fun handleUserAppNotFoundException(ex: Exception): ResponseEntity<String> {
         logger.warn { "Got UserAppNotFoundException" }
         return ResponseEntity("User not found", HttpStatus.BAD_REQUEST)
