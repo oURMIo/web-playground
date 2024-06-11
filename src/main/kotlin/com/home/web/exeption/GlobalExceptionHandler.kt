@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.resource.NoResourceFoundException
 
-private val logger = KotlinLogging.logger {}
-
 @ControllerAdvice
 class GlobalExceptionHandler {
+    private val logger = KotlinLogging.logger { GlobalExceptionHandler::class.java }
 
     @ExceptionHandler(NoResourceFoundException::class)
     fun handleNoResourceFoundException(ex: Exception): ResponseEntity<String> {
@@ -31,9 +30,9 @@ class GlobalExceptionHandler {
         return ResponseEntity("Received invalid request type", HttpStatus.BAD_REQUEST)
     }
 
-    @ExceptionHandler(UserAppNotFoundException::class)
-    fun handleUserAppNotFoundException(ex: Exception): ResponseEntity<String> {
-        logger.warn { "Got UserAppNotFoundException" }
+    @ExceptionHandler(AppUserNotFoundException::class)
+    fun handleAppUserNotFoundException(ex: Exception): ResponseEntity<String> {
+        logger.warn { "Got AppUserNotFoundException" }
         return ResponseEntity("User not found", HttpStatus.BAD_REQUEST)
     }
 
